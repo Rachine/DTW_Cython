@@ -121,7 +121,7 @@ def DTW(x, y, return_alignment=0, cython_dist_function=None,
     cdef int r_a = return_alignment
     cdef dist_func_t c_d_func = e2_dist
     ###cdef CTYPE_t[:,:] d_array = np.empty((0,0), dtype=CTYPE)
-    if (cython_dist_function == None and dist_array == None and python_dist_function == None) or cython_dist_function == "squared_euclidian":
+    if (cython_dist_function is None and dist_array is None and python_dist_function is None) or cython_dist_function == "squared_euclidian":
         return DTW_f(xx, yy, dist_function=c_d_func, return_alignment=r_a)
     elif cython_dist_function != None:
         if cython_dist_function == "euclidian":
@@ -135,7 +135,7 @@ def DTW(x, y, return_alignment=0, cython_dist_function=None,
             sys.exit(-1)
         return DTW_f(xx, yy, dist_function=c_d_func, return_alignment=r_a)
     else:
-        if dist_array != None:
+        if not(dist_array is None):
             d_array = np.empty((0,0), dtype=CTYPE) ###
             assert dist_array.shape == (xx.shape[0], yy.shape[0]), "dist_array is not of X.Y shape"
             if dist_array.dtype != CTYPE:
