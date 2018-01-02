@@ -39,15 +39,14 @@ setup(
         ],
         install_requires=['Cython', 'numpy'],
         cmdclass={'build_ext': build_ext},
-        ext_modules=[Extension("_example_dist", 
-                                 ["dtw/_example_dist.pyx"],
-                                 include_dirs=py_inc+np_inc+['dtw'],
-                                 extra_compile_args=["-O3"]),
-                       Extension("_dtw", 
-                                 ["dtw/_dtw.pyx"],
-                                 include_dirs=py_inc+np_inc+['dtw'],
-                                 extra_compile_args=["-O3"])],
+        ext_modules=[Extension("_example_dist",
+                               ["dtw/_example_dist.pyx"],
+                               include_dirs=py_inc+np_inc+['dtw'],
+                               extra_compile_args=["-O3", "-Wno-cpp"]),
+                     Extension("_dtw",
+                               ["dtw/_dtw.pyx"],
+                               include_dirs=py_inc+np_inc+['dtw'],
+                               extra_compile_args=["-O3"])],
         include_dirs=[numpy.get_include(),
                       os.path.join(numpy.get_include(), 'numpy')]
 )
-
